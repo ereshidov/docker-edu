@@ -26,9 +26,27 @@ services:
     # Ссылка на объект вне контейнера
     volumes:
       - mongodb_api:/data/db
+  auth:
+    build: ./auth
+    container_name: docker-edu-auth
+    command: npm run start
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URL=mongodb://auth_db:27017/auth
+    depends_on:
+      - auth_db
+  auth_db:
+    container_name: docker-edu-auth-db
+    image: mongo:latest
+    volumes:
+      - mongodb_auth:/data/db
 
 # Такая запись позволяет шарить volumes между сервисами
 volumes:
   mongodb_api:
+  mongodb_auth:
 
 # docker logs <service_name> - можно просматривать логи каждого отдельного сервиса

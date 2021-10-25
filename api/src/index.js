@@ -5,6 +5,6 @@ app.get("/test", (req, res) => {
   res.send("API server is working correctly");
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("API service was started");
 });

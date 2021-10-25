@@ -1,20 +1,25 @@
-version: '3'
+version: "3"
 services:
-        api:
-                build: ./api
-                # Команда, которая выполнится при старте сервиса
-                command: npm run start
-                # Если контейнер упал или произошла какая-то ошибка
-                # то docker-compose попробует перезапустить билд 
-                restart: unless-stopped
-                # Указываем какие порты будут доступны снаружи
-                ports:
-                        # слева - порт хоста
-                        # справа - порт внутри контейнера
-                         - "3000:3000"
-                # Переменные окружения
-                # Прокидывается в process.env
-                environments:
-                        - PORT=3000
-                        - MONGO_URL=
+  api:
+    build: ./api
+    # Команда, которая выполнится при старте сервиса
+    command: npm run start
+    # Если контейнер упал или произошла какая-то ошибка
+    # то docker-compose попробует перезапустить билд
+    restart: unless-stopped
+    # Указываем какие порты будут доступны снаружи
+    ports:
+      # слева - порт хоста
+      # справа - порт внутри контейнера
+      - "3000:3000"
+    # Переменные окружения
+    # Прокидывается в process.env
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://api_db:27017/api
+    depends_on:
+      - api_db
+  api_db:
+    image: mongo:latest
 
+# docker logs <service_name> - можно просматривать логи каждого отдельного сервиса

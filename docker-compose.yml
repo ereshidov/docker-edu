@@ -21,5 +21,12 @@ services:
       - api_db
   api_db:
     image: mongo:latest
+    # Ссылка на объект вне контейнера
+    volumes:
+      - mongodb_api:/data/db
+
+# Такая запись позволяет шарить volumes между сервисами
+volumes:
+  mongodb_api:
 
 # docker logs <service_name> - можно просматривать логи каждого отдельного сервиса

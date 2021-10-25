@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const { port } = require("./configuration");
-const { connectDb } = require("./helpers/db");
+const { connectDb } = require("./helpers/db")
 
 const app = express();
 const postSchema = new mongoose.Schema({

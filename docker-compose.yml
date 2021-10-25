@@ -2,6 +2,7 @@ version: "3"
 services:
   api:
     build: ./api
+    container_name: docker-edu-api
     # Команда, которая выполнится при старте сервиса
     command: npm run start
     # Если контейнер упал или произошла какая-то ошибка
@@ -20,6 +21,7 @@ services:
     depends_on:
       - api_db
   api_db:
+    container_name: docker-edu-api-db
     image: mongo:latest
     # Ссылка на объект вне контейнера
     volumes:

@@ -1,5 +1,20 @@
 version: "3"
 services:
+  frontend:
+    build: ./frontend
+    container_name: docker-edu-frontend
+    command: npm run start
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    # Так как у create-react-app интерактивная консоль
+    # то нужно определить следующие поля, чтобы все работало
+    stdin_open: true
+    tty: true
+    #
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+
   api:
     build: ./api
     container_name: docker-edu-api
@@ -12,11 +27,11 @@ services:
     ports:
       # слева - порт хоста
       # справа - порт внутри контейнера
-      - "3000:3000"
+      - "3001:3001"
     # Переменные окружения
     # Прокидывается в process.env
     environment:
-      - PORT=3000
+      - PORT=3001
       - MONGO_URL=mongodb://api_db:27017/api
     depends_on:
       - api_db
@@ -32,9 +47,9 @@ services:
     command: npm run start
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "3002:3002"
     environment:
-      - PORT=3001
+      - PORT=3002
       - MONGO_URL=mongodb://auth_db:27017/auth
     depends_on:
       - auth_db

@@ -15,7 +15,6 @@ const startServer = () => {
     console.log(`API service was started, on port: ${port}`);
 
     const testPost = new Post({name: 'Silence'});
-    console.log(testPost.name);
 
   });
 };

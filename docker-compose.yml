@@ -16,4 +16,5 @@ services:
                 # Прокидывается в process.env
                 environments:
                         - PORT=3000
+                        - MONGO_URL=
 

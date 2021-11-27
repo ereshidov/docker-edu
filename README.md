@@ -1,9 +1,13 @@
 ### Start commands
 
 ```bash
-
 make dev 
-
-make prod 
-
 ```
+```bash
+make prod
+```
+
+
+### Useful commands
+
+docker exec <container_name> sh

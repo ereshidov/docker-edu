@@ -2,12 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const handleClick = () => {
+    console.log('make api request was clicked');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> TEST
+          asdjlaksjdasdskal
         </p>
         <a
           className="App-link"
@@ -18,6 +23,8 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <button onClick={handleClick} >Make API TESTT</button>
     </div>
   );
 }

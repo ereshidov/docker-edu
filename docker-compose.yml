@@ -29,12 +29,16 @@ services:
       - AUTH_API_URL=http://auth:3002/api
     depends_on:
       - api_db
+    networks:
+      - docker-edu-network
   api_db:
     container_name: docker-edu-api-db
     image: mongo:latest
     # Ссылка на объект вне контейнера
     volumes:
       - mongodb_api:/data/db
+    networks:
+      - docker-edu-network
   auth:
     build: ./auth
     container_name: docker-edu-auth
@@ -47,11 +51,15 @@ services:
       - MONGO_URL=mongodb://auth_db:27017/auth
     depends_on:
       - auth_db
+    networks:
+      - docker-edu-network
   auth_db:
     container_name: docker-edu-auth-db
     image: mongo:latest
     volumes:
       - mongodb_auth:/data/db
+    networks:
+      - docker-edu-network
   nginx:
     image: nginx:stable-alpine
     container_name: docker-edu-nginx
@@ -61,6 +69,8 @@ services:
       - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
     depends_on:
       - frontend
+    networks:
+      - docker-edu-network
 
 # Такая запись позволяет шарить volumes между сервисами
 volumes:
@@ -68,3 +78,7 @@ volumes:
   mongodb_auth:
 
 # docker logs <service_name> - можно просматривать логи каждого отдельного сервиса
+
+networks:
+  docker-edu-network:
+    driver: bridge

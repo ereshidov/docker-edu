@@ -3,17 +3,17 @@ services:
   frontend:
     build: ./frontend
     container_name: docker-edu-frontend
-    command: npm run start
+    command: serve -s build -l 3000
     ports:
       - "3000:3000"
     restart: unless-stopped
     # Так как у create-react-app интерактивная консоль
     # то нужно определить следующие поля, чтобы все работало
-    stdin_open: true
-    tty: true
-    #
-    volumes:
-      - ./frontend/src:/usr/src/app/src
+    # stdin_open: true
+    # tty: true
+    # #
+    # volumes:
+    #   - ./frontend/src:/usr/src/app/src
 
   api:
     build: ./api
